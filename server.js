@@ -5,12 +5,12 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:5173"
 };
 
 app.use(cors(corsOptions));
 
-const db = require("./models");
+const db = require("./app/models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -24,6 +24,8 @@ db.mongoose
     process.exit();
   });
 
+  console.log("we are continue");
+
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -34,6 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to My application." });
 });
+
+require("./app/routes/tutorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
