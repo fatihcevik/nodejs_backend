@@ -1,3 +1,3 @@
 module.exports = {
-    url: "mongodb://localhost:27017/mymongo_db"
+    url: "mongodb://mydbuser:pass@localhost:27018/tutorials_db"
   };
