@@ -36,7 +36,6 @@ exports.signup = (req, res) => {
               res.status(500).send({ message: err });
               return;
             }
-
             res.send({ message: "User was registered successfully!" });
           });
         }
@@ -63,12 +62,11 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  User.findOne({
-    username: req.body.username
-  })
+   User.findOne({username: req.body.username})
     .populate("roles", "-__v")
     .exec((err, user) => {
       if (err) {
+        console.log(err);
         res.status(500).send({ message: err });
         return;
       }
