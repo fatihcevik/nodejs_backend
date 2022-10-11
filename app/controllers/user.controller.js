@@ -14,12 +14,7 @@ exports.create = (req, res) => {
     username: String,
     email: String,
     password: String,
-    roles: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Role"
-      }
-    ]
+    roles: []
   });
 
   // Save User in the database
@@ -39,7 +34,6 @@ exports.create = (req, res) => {
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const username = req.query.username;
-  console.log(username);
   var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
 
   User.find(condition)

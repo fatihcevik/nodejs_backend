@@ -70,6 +70,13 @@ exports.update = (req, res) => {
       message: "Data to update can not be empty!"
     });
   }
+
+  const currentUser = req.user;
+
+  if (currentUser.Role['role'] !== Role.Admin) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
   const id = req.params.id;
   Tutorial.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then(data => {
